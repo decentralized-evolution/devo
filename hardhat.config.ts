@@ -2,6 +2,7 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "@openzeppelin/hardhat-upgrades";
 
 import "./tasks/accounts";
 import "./tasks/deploy";
@@ -11,6 +12,8 @@ import { resolve } from "path";
 import { config as dotenvConfig } from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 import { NetworkUserConfig } from "hardhat/types";
+
+require("@openzeppelin/hardhat-upgrades");
 
 dotenvConfig({ path: resolve(__dirname, "./.env") });
 
@@ -61,14 +64,6 @@ const config: HardhatUserConfig = {
         mnemonic,
       },
       chainId: chainIds.hardhat,
-    },
-    hardhat_local: {
-      url: "http://127.0.0.1:8545/",
-      accounts: ["6846ec3f0c6276695c41fb10ea72ed6d5b836175385381f83119a37eeed35d84"],
-    },
-    ganache: {
-      url: "http://127.0.0.1:7545",
-      accounts: ["80b2b30a3c01e23f24fe70326bb9d38e2293395d07c08a742a77cd3bf39e8746"],
     },
     goerli: getChainConfig("goerli"),
     kovan: getChainConfig("kovan"),
